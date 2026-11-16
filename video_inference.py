@@ -696,8 +696,8 @@ def load_video_unite(models_dir, device="cpu"):
     classifier.eval()
 
     _unite_end = time.perf_counter()
-    logging.info(
-        "UNITE timing | processor_load=%.2fs | backbone_load=%.2fs | "
+    logging.warning(
+        "[FAKTRION UNITE TIMING] | processor_load=%.2fs | backbone_load=%.2fs | "
         "classifier_load=%.2fs | total_load=%.2fs",
         _unite_processor_done - _unite_start,
         _unite_backbone_done - _unite_processor_done,
@@ -763,8 +763,8 @@ def predict_video_unite(
     )
 
     _unite_end = time.perf_counter()
-    logging.info(
-        "UNITE timing | preprocess=%.2fs | vision_inference=%.2fs | "
+    logging.warning(
+        "[FAKTRION UNITE TIMING] | preprocess=%.2fs | vision_inference=%.2fs | "
         "temporal_head=%.2fs | total_predict=%.2fs",
         _unite_preprocess_done - _unite_start,
         _unite_vision_done - _unite_preprocess_done,
