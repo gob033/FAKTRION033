@@ -121,6 +121,7 @@ import io
 import tempfile
 import os
 import torch
+import time
 from PIL import Image
 
 from photo_inference import load_photo_model, predict_photo
@@ -136,6 +137,16 @@ from video_inference import (
 MODEL_IDS = {'CLIP ViT-B/32': 'photo_clip', 'Swin-Tiny': 'photo_swin', 'ConvNeXt-Tiny': 'photo_convnext', 'DINOv2 ViT-S/14': 'photo_dinov2', 'EfficientNet-B0': 'photo_efficientnet', 'UNITE-inspired SigLIP Transformer': 'video_unite', 'CLIP ViT-B/32 + Temporal Pooling': 'video_clip', 'DINOv2 + Temporal Attention': 'video_dinov2', 'Video Swin Transformer-Tiny': 'video_swin', 'VideoMAE-Base (Fine-tuned)': 'video_videomae'}
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+# CPU-only deployment: cap excessive thread contention; configurable via
+# Streamlit Cloud environment variable FAKTRION_CPU_THREADS (default 2).
+if DEVICE == "cpu":
+    _cpu_threads = max(1, min(8, int(os.getenv("FAKTRION_CPU_THREADS", "2"))))
+    torch.set_num_threads(_cpu_threads)
+    try:
+        torch.set_num_interop_threads(1)
+    except RuntimeError:
+        pass  # Already initialized by another library.
+
 MODELS_DIR = Path(__file__).resolve().parent / "models"
 
 @st.cache_resource(show_spinner=False, max_entries=2)
@@ -157,7 +168,10 @@ def get_detection_model(model_id, device):
 
 def detect_media(model_id, uploaded_file):
 
+    _load_started = time.perf_counter()
     loaded = get_detection_model(model_id, DEVICE)
+    print(f"[FAKTRION PERF] {model_id}: model load/cache lookup "
+          f"{time.perf_counter() - _load_started:.2f}s", flush=True)
 
     if model_id.startswith("photo_"):
 
@@ -237,7 +251,11 @@ if detect and uploaded_file is not None:
     model_id = MODEL_IDS[selected_model]
     try:
         with st.spinner("Loading detection engine and analyzing your media…"):
+            _analysis_started = time.perf_counter()
             result = detect_media(model_id, uploaded_file)
+            _analysis_seconds = time.perf_counter() - _analysis_started
+            print(f"[FAKTRION PERF] {model_id}: total analysis "
+                  f"{_analysis_seconds:.2f}s", flush=True)
         prediction = result["prediction"]
         confidence = float(result["confidence"])
         ai_score = max(0.0, min(100.0, float(result["ai_probability"])))
@@ -252,6 +270,7 @@ if detect and uploaded_file is not None:
         with c2:
             st.metric("Real-content score", f"{real_score:.2f}%")
         st.markdown(f'<div class="score-row"><span>AI-generated</span><span>{ai_score:.2f}%</span></div><div class="score-track"><div class="score-fill" style="width:{ai_score:.2f}%"></div></div><div class="score-row"><span>Real content</span><span>{real_score:.2f}%</span></div><div class="score-track"><div class="score-fill real" style="width:{real_score:.2f}%"></div></div>', unsafe_allow_html=True)
+        st.caption(f"⏱ Analysis time: {_analysis_seconds:.1f} seconds (including model loading)")
         st.markdown('<div class="score-foot">Research-use classification only. Scores are model softmax outputs, not calibrated probabilities of correctness or proof of authenticity. Results can vary by model and media quality.</div>', unsafe_allow_html=True)
     except Exception as error:
         st.error(f"Detection failed: {error}")
