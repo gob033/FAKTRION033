@@ -787,6 +787,7 @@ def load_video_videomae(models_dir, device="cpu"):
 
     from transformers import (
         VideoMAEModel,
+        VideoMAEConfig,
         VideoMAEImageProcessor
     )
 
@@ -796,9 +797,10 @@ def load_video_videomae(models_dir, device="cpu"):
         model_id
     )
 
-    backbone = VideoMAEModel.from_pretrained(
-        model_id
-    )
+    # The fine-tuned checkpoint contains the complete backbone weights.
+    # Avoid downloading an additional ~330 MB pretrained backbone.
+    config = VideoMAEConfig.from_pretrained(model_id)
+    backbone = VideoMAEModel(config)
 
     model = FineTuneVideoMAE(backbone)
 
@@ -816,9 +818,20 @@ def load_video_videomae(models_dir, device="cpu"):
     )
 
     if checkpoint_path is None:
-        raise FileNotFoundError(
-            "VideoMAE fine-tuned checkpoint not found."
-        )
+        # Hugging Face Hub caches this large checkpoint across app reruns
+        # while the server's cache remains available.
+        try:
+            from huggingface_hub import hf_hub_download
+            checkpoint_path = Path(hf_hub_download(
+                repo_id="gobeshonagar/FAKTRION033-VideoMAE",
+                filename="best_model.pth",
+                repo_type="model",
+            ))
+        except Exception as exc:
+            raise RuntimeError(
+                "VideoMAE checkpoint download failed. "
+                "Check Hugging Face connectivity and available disk space."
+            ) from exc
 
     checkpoint = torch.load(
         checkpoint_path,
