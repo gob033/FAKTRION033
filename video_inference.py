@@ -736,32 +736,13 @@ def predict_video_unite(
 
     _unite_preprocess_done = time.perf_counter()
 
-    # Step 161: CPU micro-batch experiment. All 8 original frames and
-    # pretrained/fine-tuned weights are preserved. Set UNITE_CPU_BATCH_SIZE=8
-    # to restore the original single-batch execution without another edit.
-    batch_size = 8 if str(device).startswith("cuda") else int(
-        os.environ.get("UNITE_CPU_BATCH_SIZE", "2")
+    outputs = encoder.vision_model(
+        pixel_values=pixels
     )
-    if batch_size not in (1, 2, 4, 8):
-        raise ValueError("UNITE_CPU_BATCH_SIZE must be 1, 2, 4, or 8")
-
-    pooled_parts = []
-    for start in range(0, pixels.shape[0], batch_size):
-        batch_start = time.perf_counter()
-        outputs = encoder.vision_model(
-            pixel_values=pixels[start:start + batch_size]
-        )
-        pooled_parts.append(outputs.pooler_output.float())
-        logging.warning(
-            "[FAKTRION UNITE BATCH] | frames=%d-%d | seconds=%.2f",
-            start + 1,
-            min(start + batch_size, pixels.shape[0]),
-            time.perf_counter() - batch_start,
-        )
 
     _unite_vision_done = time.perf_counter()
 
-    features = torch.cat(pooled_parts, dim=0)
+    features = outputs.pooler_output.float()
 
     if features.shape != (8, 1152):
         raise ValueError(
