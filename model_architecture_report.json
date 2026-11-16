@@ -1,0 +1,1100 @@
+{
+  "photo_clip": {
+    "checkpoint": "photo_models/clip_vit_b32/best_model.pth",
+    "metadata": {
+      "best_epoch": 10,
+      "val_loss": 0.04038719832897186,
+      "feature_dim": 512,
+      "class_names": [
+        "ai",
+        "real"
+      ]
+    },
+    "layers": {
+      "net.0.weight": [
+        256,
+        512
+      ],
+      "net.0.bias": [
+        256
+      ],
+      "net.3.weight": [
+        2,
+        256
+      ],
+      "net.3.bias": [
+        2
+      ]
+    }
+  },
+  "photo_swin": {
+    "checkpoint": "photo_models/swin_tiny/best_model.pth",
+    "metadata": {
+      "best_epoch": 10,
+      "val_loss": 0.10835113376379013,
+      "val_acc": 95.92760801315308,
+      "feature_dim": 768,
+      "class_names": [
+        "ai",
+        "real"
+      ],
+      "encoder": "Swin Transformer-Tiny",
+      "encoder_frozen": true
+    },
+    "layers": {
+      "net.0.weight": [
+        256,
+        768
+      ],
+      "net.0.bias": [
+        256
+      ],
+      "net.3.weight": [
+        2,
+        256
+      ],
+      "net.3.bias": [
+        2
+      ]
+    }
+  },
+  "photo_convnext": {
+    "checkpoint": "photo_models/convnext_tiny/best_model.pth",
+    "metadata": {
+      "best_epoch": 10,
+      "val_loss": 0.11819708347320557,
+      "val_acc": 94.57014203071594,
+      "feature_dim": 768,
+      "class_names": [
+        "ai",
+        "real"
+      ],
+      "encoder": "ConvNeXt-Tiny",
+      "encoder_frozen": true
+    },
+    "layers": {
+      "net.0.weight": [
+        256,
+        768
+      ],
+      "net.0.bias": [
+        256
+      ],
+      "net.3.weight": [
+        2,
+        256
+      ],
+      "net.3.bias": [
+        2
+      ]
+    }
+  },
+  "photo_dinov2": {
+    "checkpoint": "photo_models/dinov2_vits14/best_model.pth",
+    "metadata": {
+      "best_epoch": 10,
+      "val_loss": 0.12005708366632462,
+      "feature_dim": 384,
+      "class_names": [
+        "ai",
+        "real"
+      ]
+    },
+    "layers": {
+      "net.0.weight": [
+        256,
+        384
+      ],
+      "net.0.bias": [
+        256
+      ],
+      "net.3.weight": [
+        2,
+        256
+      ],
+      "net.3.bias": [
+        2
+      ]
+    }
+  },
+  "photo_efficientnet": {
+    "checkpoint": "photo_models/efficientnet_b0/best_model.pth",
+    "metadata": {
+      "best_epoch": 10,
+      "val_loss": 0.12604917585849762,
+      "val_acc": 93.66516470909119,
+      "feature_dim": 1280,
+      "class_names": [
+        "ai",
+        "real"
+      ],
+      "encoder": "EfficientNet-B0",
+      "encoder_frozen": true
+    },
+    "layers": {
+      "net.0.weight": [
+        256,
+        1280
+      ],
+      "net.0.bias": [
+        256
+      ],
+      "net.3.weight": [
+        2,
+        256
+      ],
+      "net.3.bias": [
+        2
+      ]
+    }
+  },
+  "video_unite": {
+    "checkpoint": "video_runs/unite_siglip_transformer/best_model.pth",
+    "metadata": {
+      "epoch": 5,
+      "val_loss": 0.020061526847772362,
+      "val_acc": 0.9917355371900827,
+      "encoder": "SigLIP-So400M",
+      "method": "UNITE-inspired temporal transformer",
+      "frames_per_video": 8,
+      "feature_dim": 1152,
+      "class_names": [
+        "ai",
+        "real"
+      ]
+    },
+    "layers": {
+      "pos_embedding": [
+        1,
+        8,
+        256
+      ],
+      "projection.0.weight": [
+        1152
+      ],
+      "projection.0.bias": [
+        1152
+      ],
+      "projection.1.weight": [
+        256,
+        1152
+      ],
+      "projection.1.bias": [
+        256
+      ],
+      "transformer.layers.0.self_attn.in_proj_weight": [
+        768,
+        256
+      ],
+      "transformer.layers.0.self_attn.in_proj_bias": [
+        768
+      ],
+      "transformer.layers.0.self_attn.out_proj.weight": [
+        256,
+        256
+      ],
+      "transformer.layers.0.self_attn.out_proj.bias": [
+        256
+      ],
+      "transformer.layers.0.linear1.weight": [
+        512,
+        256
+      ],
+      "transformer.layers.0.linear1.bias": [
+        512
+      ],
+      "transformer.layers.0.linear2.weight": [
+        256,
+        512
+      ],
+      "transformer.layers.0.linear2.bias": [
+        256
+      ],
+      "transformer.layers.0.norm1.weight": [
+        256
+      ],
+      "transformer.layers.0.norm1.bias": [
+        256
+      ],
+      "transformer.layers.0.norm2.weight": [
+        256
+      ],
+      "transformer.layers.0.norm2.bias": [
+        256
+      ],
+      "transformer.layers.1.self_attn.in_proj_weight": [
+        768,
+        256
+      ],
+      "transformer.layers.1.self_attn.in_proj_bias": [
+        768
+      ],
+      "transformer.layers.1.self_attn.out_proj.weight": [
+        256,
+        256
+      ],
+      "transformer.layers.1.self_attn.out_proj.bias": [
+        256
+      ],
+      "transformer.layers.1.linear1.weight": [
+        512,
+        256
+      ],
+      "transformer.layers.1.linear1.bias": [
+        512
+      ],
+      "transformer.layers.1.linear2.weight": [
+        256,
+        512
+      ],
+      "transformer.layers.1.linear2.bias": [
+        256
+      ],
+      "transformer.layers.1.norm1.weight": [
+        256
+      ],
+      "transformer.layers.1.norm1.bias": [
+        256
+      ],
+      "transformer.layers.1.norm2.weight": [
+        256
+      ],
+      "transformer.layers.1.norm2.bias": [
+        256
+      ],
+      "attention_heads.weight": [
+        4,
+        256
+      ],
+      "attention_heads.bias": [
+        4
+      ],
+      "classifier.0.weight": [
+        256
+      ],
+      "classifier.0.bias": [
+        256
+      ],
+      "classifier.1.weight": [
+        128,
+        256
+      ],
+      "classifier.1.bias": [
+        128
+      ],
+      "classifier.4.weight": [
+        2,
+        128
+      ],
+      "classifier.4.bias": [
+        2
+      ]
+    }
+  },
+  "video_clip": {
+    "checkpoint": "video_runs/clip_vit_b32_temporal/best_model.pth",
+    "metadata": {
+      "epoch": 8,
+      "val_loss": 0.060397554342904364,
+      "val_acc": 0.9752066115702479,
+      "input_dim": 512,
+      "class_names": [
+        "ai",
+        "real"
+      ],
+      "feature_model": "openai/clip-vit-base-patch32",
+      "aggregation": "temporal_mean_pooling",
+      "method": "frozen_encoder_classifier"
+    },
+    "layers": {
+      "network.0.weight": [
+        256,
+        512
+      ],
+      "network.0.bias": [
+        256
+      ],
+      "network.3.weight": [
+        64,
+        256
+      ],
+      "network.3.bias": [
+        64
+      ],
+      "network.6.weight": [
+        2,
+        64
+      ],
+      "network.6.bias": [
+        2
+      ]
+    }
+  },
+  "video_dinov2": {
+    "checkpoint": "video_runs/dinov2_temporal_attention/best_model.pth",
+    "metadata": {
+      "epoch": 5,
+      "val_loss": 0.09878212607596532,
+      "val_acc": 0.9462809917355371,
+      "input_dim": 384,
+      "frames_per_video": 8,
+      "class_names": [
+        "ai",
+        "real"
+      ],
+      "encoder": "DINOv2 ViT-S/14",
+      "method": "learnable_temporal_attention"
+    },
+    "layers": {
+      "projection.0.weight": [
+        384
+      ],
+      "projection.0.bias": [
+        384
+      ],
+      "projection.1.weight": [
+        256,
+        384
+      ],
+      "projection.1.bias": [
+        256
+      ],
+      "attention.0.weight": [
+        128,
+        256
+      ],
+      "attention.0.bias": [
+        128
+      ],
+      "attention.2.weight": [
+        1,
+        128
+      ],
+      "attention.2.bias": [
+        1
+      ],
+      "classifier.0.weight": [
+        128,
+        256
+      ],
+      "classifier.0.bias": [
+        128
+      ],
+      "classifier.3.weight": [
+        2,
+        128
+      ],
+      "classifier.3.bias": [
+        2
+      ]
+    }
+  },
+  "video_swin": {
+    "checkpoint": "video_runs/swin3d_t/best_model.pth",
+    "metadata": {
+      "epoch": 9,
+      "val_loss": 0.06931915214239073,
+      "val_acc": 0.9793388429752066,
+      "encoder": "Swin3D-T Kinetics400",
+      "feature_dim": 768,
+      "frames_per_video": 16,
+      "class_names": [
+        "ai",
+        "real"
+      ]
+    },
+    "layers": {
+      "network.0.weight": [
+        768
+      ],
+      "network.0.bias": [
+        768
+      ],
+      "network.1.weight": [
+        256,
+        768
+      ],
+      "network.1.bias": [
+        256
+      ],
+      "network.4.weight": [
+        64,
+        256
+      ],
+      "network.4.bias": [
+        64
+      ],
+      "network.7.weight": [
+        2,
+        64
+      ],
+      "network.7.bias": [
+        2
+      ]
+    }
+  },
+  "video_videomae": {
+    "checkpoint": "video_runs/videomae_base_finetuned/best_model.pth",
+    "metadata": {
+      "epoch": 4,
+      "val_loss": 0.14107490866637426,
+      "val_acc": 0.9545454545454546,
+      "model_name": "MCG-NJU/videomae-base",
+      "method": "partial_finetuning_last_2_blocks",
+      "class_names": [
+        "ai",
+        "real"
+      ]
+    },
+    "layers": {
+      "backbone.embeddings.patch_embeddings.projection.weight": [
+        768,
+        3,
+        2,
+        16,
+        16
+      ],
+      "backbone.embeddings.patch_embeddings.projection.bias": [
+        768
+      ],
+      "backbone.encoder.layer.0.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.0.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.0.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.0.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.0.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.0.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.0.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.0.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.0.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.0.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.0.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.0.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.0.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.0.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.0.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.1.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.1.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.1.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.1.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.1.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.1.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.1.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.1.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.1.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.1.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.1.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.1.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.1.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.1.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.1.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.2.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.2.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.2.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.2.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.2.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.2.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.2.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.2.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.2.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.2.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.2.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.2.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.2.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.2.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.2.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.3.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.3.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.3.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.3.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.3.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.3.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.3.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.3.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.3.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.3.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.3.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.3.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.3.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.3.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.3.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.4.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.4.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.4.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.4.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.4.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.4.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.4.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.4.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.4.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.4.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.4.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.4.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.4.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.4.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.4.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.5.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.5.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.5.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.5.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.5.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.5.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.5.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.5.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.5.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.5.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.5.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.5.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.5.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.5.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.5.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.6.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.6.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.6.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.6.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.6.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.6.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.6.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.6.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.6.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.6.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.6.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.6.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.6.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.6.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.6.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.7.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.7.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.7.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.7.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.7.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.7.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.7.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.7.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.7.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.7.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.7.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.7.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.7.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.7.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.7.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.8.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.8.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.8.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.8.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.8.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.8.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.8.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.8.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.8.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.8.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.8.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.8.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.8.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.8.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.8.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.9.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.9.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.9.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.9.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.9.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.9.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.9.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.9.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.9.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.9.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.9.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.9.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.9.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.9.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.9.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.10.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.10.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.10.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.10.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.10.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.10.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.10.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.10.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.10.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.10.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.10.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.10.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.10.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.10.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.10.layernorm_after.bias": [
+        768
+      ],
+      "backbone.encoder.layer.11.attention.attention.query.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.11.attention.attention.query.bias": [
+        768
+      ],
+      "backbone.encoder.layer.11.attention.attention.key.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.11.attention.attention.value.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.11.attention.attention.value.bias": [
+        768
+      ],
+      "backbone.encoder.layer.11.attention.output.dense.weight": [
+        768,
+        768
+      ],
+      "backbone.encoder.layer.11.attention.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.11.intermediate.dense.weight": [
+        3072,
+        768
+      ],
+      "backbone.encoder.layer.11.intermediate.dense.bias": [
+        3072
+      ],
+      "backbone.encoder.layer.11.output.dense.weight": [
+        768,
+        3072
+      ],
+      "backbone.encoder.layer.11.output.dense.bias": [
+        768
+      ],
+      "backbone.encoder.layer.11.layernorm_before.weight": [
+        768
+      ],
+      "backbone.encoder.layer.11.layernorm_before.bias": [
+        768
+      ],
+      "backbone.encoder.layer.11.layernorm_after.weight": [
+        768
+      ],
+      "backbone.encoder.layer.11.layernorm_after.bias": [
+        768
+      ],
+      "backbone.layernorm.weight": [
+        768
+      ],
+      "backbone.layernorm.bias": [
+        768
+      ],
+      "classifier.0.weight": [
+        768
+      ],
+      "classifier.0.bias": [
+        768
+      ],
+      "classifier.1.weight": [
+        256,
+        768
+      ],
+      "classifier.1.bias": [
+        256
+      ],
+      "classifier.4.weight": [
+        2,
+        256
+      ],
+      "classifier.4.bias": [
+        2
+      ]
+    }
+  }
+}

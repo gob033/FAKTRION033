@@ -286,7 +286,120 @@ if uploaded_file is not None:
         f"Size: {uploaded_file.size / (1024*1024):.2f} MB"
     )
 
+
 # ---------------- DETECTION ----------------
+
+import io
+import tempfile
+import os
+import torch
+from PIL import Image
+
+from photo_inference import load_photo_model, predict_photo
+from video_inference import (
+    extract_video_frames,
+    load_video_clip, predict_video_clip,
+    load_video_dinov2, predict_video_dinov2,
+    load_video_swin, predict_video_swin,
+    load_video_unite, predict_video_unite,
+    load_video_videomae, predict_video_videomae
+)
+
+MODEL_IDS = {'CLIP ViT-B/32': 'photo_clip', 'Swin-Tiny': 'photo_swin', 'ConvNeXt-Tiny': 'photo_convnext', 'DINOv2 ViT-S/14': 'photo_dinov2', 'EfficientNet-B0': 'photo_efficientnet', 'UNITE-inspired SigLIP Transformer': 'video_unite', 'CLIP ViT-B/32 + Temporal Pooling': 'video_clip', 'DINOv2 + Temporal Attention': 'video_dinov2', 'Video Swin Transformer-Tiny': 'video_swin', 'VideoMAE-Base (Fine-tuned)': 'video_videomae'}
+
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+MODELS_DIR = Path(__file__).resolve().parent / "models"
+
+@st.cache_resource(show_spinner=False, max_entries=2)
+def get_detection_model(model_id, device):
+
+    if model_id.startswith("photo_"):
+        return load_photo_model(model_id, MODELS_DIR, device)
+
+    loaders = {
+        "video_clip": load_video_clip,
+        "video_dinov2": load_video_dinov2,
+        "video_swin": load_video_swin,
+        "video_unite": load_video_unite,
+        "video_videomae": load_video_videomae
+    }
+
+    return loaders[model_id](MODELS_DIR, device)
+
+
+def detect_media(model_id, uploaded_file):
+
+    loaded = get_detection_model(model_id, DEVICE)
+
+    if model_id.startswith("photo_"):
+
+        image = Image.open(
+            io.BytesIO(uploaded_file.getvalue())
+        )
+
+        encoder, classifier, preprocess, extract = loaded
+
+        return predict_photo(
+            image, encoder, classifier,
+            preprocess, extract, DEVICE
+        )
+
+    suffix = Path(uploaded_file.name).suffix.lower()
+
+    if suffix not in (".mp4", ".mov", ".avi", ".mkv", ".webm"):
+        raise ValueError("Unsupported video format.")
+
+    temporary_path = None
+
+    try:
+        with tempfile.NamedTemporaryFile(
+            suffix=suffix, delete=False
+        ) as temp:
+            temp.write(uploaded_file.getvalue())
+            temporary_path = temp.name
+
+        frames, _ = extract_video_frames(
+            temporary_path,
+            num_frames=8,
+            size=224
+        )
+
+        if model_id == "video_clip":
+            encoder, processor, classifier = loaded
+            return predict_video_clip(
+                frames, encoder, processor, classifier, DEVICE
+            )
+
+        if model_id == "video_dinov2":
+            encoder, preprocess, classifier = loaded
+            return predict_video_dinov2(
+                frames, encoder, preprocess, classifier, DEVICE
+            )
+
+        if model_id == "video_swin":
+            encoder, classifier = loaded
+            return predict_video_swin(
+                frames, encoder, classifier, DEVICE
+            )
+
+        if model_id == "video_unite":
+            encoder, processor, classifier = loaded
+            return predict_video_unite(
+                frames, encoder, processor, classifier, DEVICE
+            )
+
+        if model_id == "video_videomae":
+            model, processor = loaded
+            return predict_video_videomae(
+                frames, model, processor, DEVICE
+            )
+
+        raise ValueError("Unsupported video model.")
+
+    finally:
+        if temporary_path and os.path.exists(temporary_path):
+            os.remove(temporary_path)
+
 
 st.markdown("---")
 
@@ -297,13 +410,49 @@ detect = st.button(
     disabled=uploaded_file is None
 )
 
-if detect:
+if detect and uploaded_file is not None:
 
-    st.info(
-        "The detection interface is ready. "
-        "Actual model inference will be connected "
-        "in the next development steps."
-    )
+    model_id = MODEL_IDS[selected_model]
+
+    try:
+        with st.spinner("Analyzing media with selected AI model..."):
+            result = detect_media(model_id, uploaded_file)
+
+        prediction = result["prediction"]
+        confidence = result["confidence"]
+
+        st.markdown("### Detection Result")
+
+        if prediction == "AI":
+            st.error(f"AI-Generated Content — {confidence:.2f}%")
+        else:
+            st.success(f"Real Content — {confidence:.2f}%")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.metric(
+                "AI Score",
+                f'{result["ai_probability"]:.2f}%'
+            )
+
+        with col2:
+            st.metric(
+                "Real Score",
+                f'{result["real_probability"]:.2f}%'
+            )
+
+        st.progress(
+            min(max(float(confidence) / 100, 0.0), 1.0)
+        )
+
+        st.caption(
+            "Scores are model softmax outputs, not guaranteed "
+            "probabilities of correctness."
+        )
+
+    except Exception as error:
+        st.error(f"Detection failed: {error}")
 
 # ---------------- FOOTER ----------------
 

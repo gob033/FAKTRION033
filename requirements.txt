@@ -1,1 +1,11 @@
 streamlit>=1.40,<2
+torch
+torchvision
+transformers
+timm
+open_clip_torch
+opencv-python-headless
+Pillow
+numpy
+safetensors
+huggingface_hub

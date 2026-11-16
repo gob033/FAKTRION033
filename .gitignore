@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env
+.venv/
+*.zip
+*.log
+video_training_pipeline.txt
+photo_training_pipeline.txt
+app_before_step125.py
+models/video_videomae/

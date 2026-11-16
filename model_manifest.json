@@ -1,0 +1,52 @@
+{
+  "photo_clip": {
+    "storage": "local",
+    "path": "models/photo_clip/best_model.pth",
+    "size_mb": 0.51
+  },
+  "photo_swin": {
+    "storage": "local",
+    "path": "models/photo_swin/best_model.pth",
+    "size_mb": 0.76
+  },
+  "photo_convnext": {
+    "storage": "local",
+    "path": "models/photo_convnext/best_model.pth",
+    "size_mb": 0.76
+  },
+  "photo_dinov2": {
+    "storage": "local",
+    "path": "models/photo_dinov2/best_model.pth",
+    "size_mb": 0.38
+  },
+  "photo_efficientnet": {
+    "storage": "local",
+    "path": "models/photo_efficientnet/best_model.pth",
+    "size_mb": 1.26
+  },
+  "video_unite": {
+    "storage": "local",
+    "path": "models/video_unite/best_model.pth",
+    "size_mb": 5.31
+  },
+  "video_clip": {
+    "storage": "local",
+    "path": "models/video_clip/best_model.pth",
+    "size_mb": 0.57
+  },
+  "video_dinov2": {
+    "storage": "local",
+    "path": "models/video_dinov2/best_model.pth",
+    "size_mb": 0.64
+  },
+  "video_swin": {
+    "storage": "local",
+    "path": "models/video_swin/best_model.pth",
+    "size_mb": 0.82
+  },
+  "video_videomae": {
+    "storage": "external_required",
+    "source": "video_runs/videomae_base_finetuned",
+    "size_mb": 329.77
+  }
+}
