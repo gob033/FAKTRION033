@@ -276,3 +276,6 @@ if detect and uploaded_file is not None:
         st.error(f"Detection failed: {error}")
 
 st.markdown('<div class="footer">✦ FAKTRION033 &nbsp; · &nbsp; Visual Authenticity Lab<br>Deep learning research prototype for synthetic and real media classification</div>', unsafe_allow_html=True)
+<div style="margin-top: 8px; color: #a99cf7; font-size: 12px;">
+    Made by <strong>Md Tauhidul Islam</strong>
+</div>
