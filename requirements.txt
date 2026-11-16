@@ -9,3 +9,4 @@ Pillow
 numpy
 safetensors
 huggingface_hub
+sentencepiece>=0.2.0
