@@ -2,6 +2,8 @@
 import os
 import cv2
 import tempfile
+import time
+import logging
 import numpy as np
 from pathlib import Path
 from PIL import Image
@@ -641,11 +643,15 @@ def load_video_unite(models_dir, device="cpu"):
 
     from transformers import AutoProcessor, AutoModel
 
+    _unite_start = time.perf_counter()
+
     model_id = "google/siglip-so400m-patch14-384"
 
     processor = AutoProcessor.from_pretrained(
         model_id
     )
+
+    _unite_processor_done = time.perf_counter()
 
     encoder = AutoModel.from_pretrained(
         model_id,
@@ -655,6 +661,8 @@ def load_video_unite(models_dir, device="cpu"):
             else torch.float32
         )
     )
+
+    _unite_backbone_done = time.perf_counter()
 
     encoder = encoder.to(device).eval()
 
@@ -687,6 +695,16 @@ def load_video_unite(models_dir, device="cpu"):
 
     classifier.eval()
 
+    _unite_end = time.perf_counter()
+    logging.info(
+        "UNITE timing | processor_load=%.2fs | backbone_load=%.2fs | "
+        "classifier_load=%.2fs | total_load=%.2fs",
+        _unite_processor_done - _unite_start,
+        _unite_backbone_done - _unite_processor_done,
+        _unite_end - _unite_backbone_done,
+        _unite_end - _unite_start,
+    )
+
     return encoder, processor, classifier
 
 
@@ -704,6 +722,8 @@ def predict_video_unite(
             "UNITE-inspired model requires 8 frames."
         )
 
+    _unite_start = time.perf_counter()
+
     inputs = processor(
         images=frames,
         return_tensors="pt"
@@ -714,9 +734,13 @@ def predict_video_unite(
     if str(device).startswith("cuda"):
         pixels = pixels.half()
 
+    _unite_preprocess_done = time.perf_counter()
+
     outputs = encoder.vision_model(
         pixel_values=pixels
     )
+
+    _unite_vision_done = time.perf_counter()
 
     features = outputs.pooler_output.float()
 
@@ -736,6 +760,16 @@ def predict_video_unite(
 
     predicted = int(
         probabilities[1] > probabilities[0]
+    )
+
+    _unite_end = time.perf_counter()
+    logging.info(
+        "UNITE timing | preprocess=%.2fs | vision_inference=%.2fs | "
+        "temporal_head=%.2fs | total_predict=%.2fs",
+        _unite_preprocess_done - _unite_start,
+        _unite_vision_done - _unite_preprocess_done,
+        _unite_end - _unite_vision_done,
+        _unite_end - _unite_start,
     )
 
     return {
