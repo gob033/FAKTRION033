@@ -272,15 +272,12 @@ if detect and uploaded_file is not None:
         st.markdown(f'<div class="score-row"><span>AI-generated</span><span>{ai_score:.2f}%</span></div><div class="score-track"><div class="score-fill" style="width:{ai_score:.2f}%"></div></div><div class="score-row"><span>Real content</span><span>{real_score:.2f}%</span></div><div class="score-track"><div class="score-fill real" style="width:{real_score:.2f}%"></div></div>', unsafe_allow_html=True)
         st.caption(f"⏱ Analysis time: {_analysis_seconds:.1f} seconds (including model loading)")
         st.markdown('<div class="score-foot">Research-use classification only. Scores are model softmax outputs, not calibrated probabilities of correctness or proof of authenticity. Results can vary by model and media quality.</div>', unsafe_allow_html=True)
-    
-except Exception as error:
-    import traceback
-
-    print(f"[DETECTION ERROR] Model: {model_id}", flush=True)
-    traceback.print_exc()
-
-    st.error(f"Detection failed: {type(error).__name__}: {error}")
-
+  
+    except Exception as error:
+        import traceback
+        print(f"[DETECTION ERROR] Model: {model_id}", flush=True)
+        traceback.print_exc()
+        st.error(f"Detection failed: {type(error).__name__}: {error}")
 st.markdown('<div class="footer">✦ FAKTRION033 &nbsp; · &nbsp; Visual Authenticity Lab<br>Deep learning research prototype for synthetic and real media classification</div>', unsafe_allow_html=True)
 
 st.markdown("""
